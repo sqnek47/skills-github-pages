@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>pytanie</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            background-color: #ffebee;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        h1 {
+            color: #d32f2f;
+            font-family: 'Arial', sans-serif;
+            margin-bottom: 20px;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 18px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        #tak {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        #nie {
+            background-color: #f44336;
+            color: white;
+            position: relative;
+        }
+
+        .gif-container {
+            margin-bottom: 20px;
+        }
+
+        .gif-container img {
+            width: auto;
+            height: auto;
+        }
+
+        /* Kontener dla nowego obrazu i GIF-ów - UKRYTY NA START */
+        .image-container {
+            display: none;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            flex-direction: row; /* GIF-y po bokach, napis na środku */
+        }
+
+        /* Napisy KC */
+        .kc-text {
+            color: #d32f2f;
+            font-size: 36px;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        /* Styl dla GIF-ów po bokach */
+        .side-gif {
+            width: 150px;
+            height: auto;
+        }
+
+        /* Kontener dla środkowego GIF-a z napisem KC */
+        .center-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Czy zostaniesz moją walentynką?</h1>
+        <div class="gif-container">
+            <img src="pusheenlove.webp" alt="GIF walentynkowy">
+        </div>
+        <div class="buttons">
+            <button id="tak">TAK</button>
+            <button id="nie">NIE</button>
+        </div>
+        <!-- Kontener z obrazem i GIF-ami - domyślnie ukryty -->
+        <div class="image-container" id="imageContainer">
+            <img src="chikawa.webp" alt="GIF lewy" class="side-gif">
+            
+            <div class="center-content">
+                <h2 class="kc-text">KC ❤️</h2>
+                <img src="hai.gif" alt="Nowy obraz" class="new-image" id="nowyObraz">
+            </div>
+
+            <img src="chikawa.webp" alt="GIF prawy" class="side-gif">
+        </div>
+    </div>
+
+    <script>
+        const takButton = document.getElementById('tak');
+        const nieButton = document.getElementById('nie');
+        const imageContainer = document.getElementById('imageContainer');
+        const pytanie = document.querySelector('h1');
+        const gifContainer = document.querySelector('.gif-container');
+        const buttonsContainer = document.querySelector('.buttons');
+
+        nieButton.addEventListener('click', function() {
+            const randomX = Math.random() * (window.innerWidth - nieButton.offsetWidth);
+            const randomY = Math.random() * (window.innerHeight - nieButton.offsetHeight);
+            nieButton.style.position = 'absolute';
+            nieButton.style.left = `${randomX}px`;
+            nieButton.style.top = `${randomY}px`;
+
+            // Zwiększ rozmiar przycisku "TAK"
+            const currentSize = parseFloat(window.getComputedStyle(takButton).fontSize);
+            takButton.style.fontSize = `${currentSize + 10}px`;
+        });
+
+        takButton.addEventListener('click', function() {
+            // Ukryj pytanie, GIF i przyciski
+            pytanie.style.display = 'none';
+            gifContainer.style.display = 'none';
+            buttonsContainer.style.display = 'none';
+
+            // Pokaż kontener z obrazem i GIF-ami
+            imageContainer.style.display = 'flex';
+        });
+    </script>
+</body>
+</html>
